@@ -75,6 +75,14 @@ This is the place for you to write reflections:
 ### Mandatory (Publisher) Reflections
 
 #### Reflection Publisher-1
+1. In the Observer pattern diagram explained by the Head First Design Pattern book, Subscriber is defined as an interface. Explain based on your understanding of Observer design patterns, do we still need an interface (or trait in Rust) in this BambangShop case, or a single Model struct is enough?
+- Tidak, kita tidak perlu menggunakan interface dalam kasus ini, karena satu Model struct saja sudah mencukupi. Setiap subscriber memiliki fungsi yang sama, yaitu menerima notifikasi melalui HTTP berdasarkan product_type yang mereka subscribe.
+
+2. id in Program and url in Subscriber is intended to be unique. Explain based on your understanding, is using Vec (list) sufficient or using DashMap (map/dictionary) like we currently use is necessary for this case?
+- Menggunakan `DashMap` lebih disarankan dalam kasus ini karena memungkinkan penyimpanan data dengan key yang tetap unik, seperti `id` pada `Program` dan `url` pada `Subscriber`.
+
+3. When programming using Rust, we are enforced by rigorous compiler constraints to make a thread-safe program. In the case of the List of Subscribers (SUBSCRIBERS) static variable, we used the DashMap external library for thread safe HashMap. Explain based on your understanding of design patterns, do we still need DashMap or we can implement Singleton pattern instead?
+- Ya, penggunaan `DashMap` tetap diperlukan meskipun telah menerapkan pola desain Singleton. Singleton hanya memastikan bahwa data tersedia secara global dalam satu instance, tetapi tidak menjamin keamanan akses ketika digunakan secara bersamaan oleh banyak thread. Oleh karena itu, `DashMap` berperan penting dalam memastikan akses ke data `SUBSCRIBERS` tetap aman dalam lingkungan yang mendukung eksekusi paralel.
 
 #### Reflection Publisher-2
 
